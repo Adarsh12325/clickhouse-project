@@ -1,0 +1,58 @@
+# submission.yml
+# Automated submission for ClickHouse & DuckDB benchmark project
+
+setup:
+  - echo "Starting environment setup..."
+  - pip install --upgrade pip
+  - pip install -r requirements.txt
+  - echo "Python dependencies installed."
+  - echo "Starting ClickHouse Docker container..."
+  - docker-compose -f docker/docker-compose.yml up -d
+  - echo "ClickHouse container is up."
+
+ingest:
+  # ---------------- DuckDB Ingestion (Baseline) ----------------
+  - echo "Starting DuckDB ingestion..."
+  - mkdir -p duckdb
+  - python scripts/ingest_duckdb.py
+  - echo "DuckDB ingestion complete."
+
+  # ---------------- ClickHouse Ingestion ----------------
+  - echo "Creating raw ClickHouse tables..."
+  - clickhouse-client --multiquery < sql/clickhouse/01_raw_table.sql
+  - echo "Ingesting data into ClickHouse..."
+  - python scripts/ingest_clickhouse.py
+
+  # ---------------- ClickHouse Optimization ----------------
+  - echo "Creating optimized ClickHouse table..."
+  - python scripts/create_optimized_table.py
+  - python scripts/load_optimized_data.py
+  - echo "Creating ClickHouse materialized view..."
+  - python scripts/create_mv.py
+  - echo "Data ingestion and optimization complete."
+
+benchmark:
+  # ---------------- Baseline Benchmarks ----------------
+  - echo "Running DuckDB baseline benchmark..."
+  - python scripts/baseline_benchmark_duckdb.py
+  
+  - echo "Running ClickHouse baseline benchmark..."
+  - python scripts/baseline_benchmark.py
+
+  # ---------------- Optimized ClickHouse Benchmarks ----------------
+  - echo "Running optimized ClickHouse benchmark..."
+  - python scripts/optimized_benchmark.py
+  - echo "Querying ClickHouse materialized view..."
+  - python scripts/query_mv.py
+  - echo "Benchmark complete."
+
+validate:
+  - echo "Validating ClickHouse results..."
+  - python scripts/check_data.py
+  - python scripts/test_clickhouse.py
+  - echo "Validation complete."
+
+cleanup:
+  - echo "Stopping ClickHouse Docker container..."
+  - docker-compose -f docker/docker-compose.yml down
+  - echo "Cleanup complete."
