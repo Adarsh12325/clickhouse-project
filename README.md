@@ -28,7 +28,7 @@ The workflow is fully automated, reproducible, and aligned with all core project
 ---
 
 ## Project Directory Structure
-**
+```text
 clickhouse-project/
 │
 ├── data/
@@ -69,7 +69,7 @@ clickhouse-project/
 ├── README.md
 ├── requirements.txt
 └── submission.yml
-**
+```
 ---
 
 ## Environment Setup
