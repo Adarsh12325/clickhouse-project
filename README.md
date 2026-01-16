@@ -28,7 +28,7 @@ The workflow is fully automated, reproducible, and aligned with all core project
 ---
 
 ## Project Directory Structure
-
+**
 clickhouse-project/
 │
 ├── data/
@@ -69,16 +69,16 @@ clickhouse-project/
 ├── README.md
 ├── requirements.txt
 └── submission.yml
-
+**
 ---
 
 ## Environment Setup
 
 ### Prerequisites
 
-> Python 3.10 or later
-> Docker and Docker Compose
-> Git
+- Python 3.10 or later
+- Docker and Docker Compose
+- Git
 
 ### Install Python Dependencies
 pip install -r requirements.txt
@@ -92,18 +92,18 @@ docker-compose -f docker/docker-compose.yml up -d
 
 ### ClickHouse Ingestion
 
-> Raw table created using sql/clickhouse/01_raw_table.sql
-> Parquet files read using Pandas
-> Columns selected and renamed before insertion
+- Raw table created using sql/clickhouse/01_raw_table.sql
+- Parquet files read using Pandas
+- Columns selected and renamed before insertion
 
 ### Run Ingestion Script
 python scripts/ingest_clickhouse.py
 
 ### DuckDB Ingestion
 
-> Schema defined in sql/duckdb/schema.sql
-> Parquet files loaded directly using read_parquet
-> Embedded database stored as a file
+- Schema defined in sql/duckdb/schema.sql
+- Parquet files loaded directly using read_parquet
+- Embedded database stored as a file
 
 ### Run Ingestion Script
 python scripts/ingest_duckdb.py
@@ -116,10 +116,10 @@ python scripts/ingest_duckdb.py
 
 ### Analytical Queries
 
-> Aggregations using GROUP BY
-> Time-based filtering
-> Revenue calculations
-> Window-style analytical workloads
+- Aggregations using GROUP BY
+- Time-based filtering
+- Revenue calculations
+- Window-style analytical workloads
 
 ## Run Baseline Benchmarks
 
@@ -134,8 +134,8 @@ python scripts/baseline_benchmark_duckdb.py
 
 === ClickHouse Baseline Benchmark Summary ===
 
-> Daily revenue per day
-> (Query: sum total_amount grouped by day)
+- Daily revenue per day
+- (Query: sum total_amount grouped by day)
 
 ### Summary Table
 
@@ -147,9 +147,9 @@ python scripts/baseline_benchmark_duckdb.py
 
 === DuckDB Baseline Benchmark Summary ===
 
-> Total revenue per day: 0.0822 seconds
-> Average fare per passenger count: 0.0163 seconds
-> Top 10 longest trips: 0.0263 seconds
+- Total revenue per day: 0.0822 seconds
+- Average fare per passenger count: 0.0163 seconds
+- Top 10 longest trips: 0.0263 seconds
 
 ### Summary Table
 
@@ -167,9 +167,9 @@ python scripts/baseline_benchmark_duckdb.py
 
 ### Optimized Table Design
 
-> Partitioned by year and month
-> Sorted by (pickup_datetime, vendor_id)
-> Improves data locality and query filtering
+- Partitioned by year and month
+- Sorted by (pickup_datetime, vendor_id)
+- Improves data locality and query filtering
 
 ### Scripts Used
 python scripts/create_optimized_table.py
@@ -177,8 +177,8 @@ python scripts/load_optimized_data.py
 
 ### Materialized View
 
-> Pre-aggregates daily revenue
-> Reduces computation during query time
+- Pre-aggregates daily revenue
+- Reduces computation during query time
 
 ### Script Used
 python scripts/create_mv.py
@@ -205,8 +205,8 @@ python scripts/query_mv.py
 
 ## Validation
 
-> Ensures materialized view results match raw query results
-> Confirms data integrity and correctness
+- Ensures materialized view results match raw query results
+- Confirms data integrity and correctness
 
 ### Scripts Used
 python scripts/check_data.py
@@ -216,29 +216,29 @@ python scripts/test_clickhouse.py
 
 ## Automated Execution
 
-> The entire workflow is automated using submission.yml, covering:
-> Setup
-> Ingestion
-> Benchmarking
-> Validation
-> Cleanup
+- The entire workflow is automated using submission.yml, covering:
+- Setup
+- Ingestion
+- Benchmarking
+- Validation
+- Cleanup
 
 ---
 
 ## Conclusion
 
-> DuckDB provides a strong baseline for local analytical workloads
-> ClickHouse shows significant performance improvements after optimization
-> Partitioning, sorting, and materialized views drastically reduce query latency
-> The project satisfies all core technical and reporting requirements
+- DuckDB provides a strong baseline for local analytical workloads
+- ClickHouse shows significant performance improvements after optimization
+- Partitioning, sorting, and materialized views drastically reduce query latency
+- The project satisfies all core technical and reporting requirements
 
 ---
 
 ## Notes
 
-> All scripts are idempotent
-> Dataset is fully Parquet-based
-> Results are reproducible on any local machine
-> Project is submission-ready
+- All scripts are idempotent
+- Dataset is fully Parquet-based
+- Results are reproducible on any local machine
+- Project is submission-ready
 
 
