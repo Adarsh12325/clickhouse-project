@@ -8,6 +8,8 @@ setup:
   - echo "Python dependencies installed."
   - echo "Starting ClickHouse Docker container..."
   - docker-compose -f docker/docker-compose.yml up -d
+  - echo "Waiting for ClickHouse to be ready..."
+  - sleep 10
   - echo "ClickHouse container is up."
 
 ingest:
