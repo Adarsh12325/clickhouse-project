@@ -116,10 +116,10 @@ python scripts/ingest_duckdb.py
 
 ### Analytical Queries
 
-# Aggregations using GROUP BY
-# Time-based filtering
-# Revenue calculations
-# Window-style analytical workloads
+> Aggregations using GROUP BY
+> Time-based filtering
+> Revenue calculations
+> Window-style analytical workloads
 
 ## Run Baseline Benchmarks
 
